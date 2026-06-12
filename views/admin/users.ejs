@@ -1,0 +1,24 @@
+<%- include('../partials/header', { title: 'Správa uživatelů' }) %>
+
+<div class="admin-wrap">
+  <h1>Správa uživatelů</h1>
+
+  <% users.forEach(oneUser => { %>
+    <div class="user-row">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="user-name"><%= oneUser.username %></span>
+        <span class="user-role-badge role-<%= oneUser.role %>"><%= oneUser.role %></span>
+      </div>
+
+      <form action="/admin/users/<%= oneUser._id %>/role" method="POST" class="user-form">
+        <select name="role">
+          <option value="user"  <%= oneUser.role === 'user'  ? 'selected' : '' %>>user</option>
+          <option value="admin" <%= oneUser.role === 'admin' ? 'selected' : '' %>>admin</option>
+        </select>
+        <button class="btn btn-ghost" type="submit">Změnit</button>
+      </form>
+    </div>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,42 @@
+<%- include('../partials/header', { title: 'Žádosti o licenci' }) %>
+
+<div class="requests-wrap">
+  <h1>Žádosti o licenci</h1>
+
+  <% if (requests.length === 0) { %>
+    <p style="color:#444;font-family:'Oswald',sans-serif;letter-spacing:1px;font-size:13px;text-transform:uppercase;">
+      Žádné žádosti zatím nebyly odeslány.
+    </p>
+  <% } %>
+
+  <% requests.forEach(request => { %>
+    <div class="request-card">
+      <div class="request-song"><%= request.song.title %> — <%= request.song.artist %></div>
+
+      <div class="request-row">
+        <strong>Žadatel</strong> <%= request.applicantName %>
+      </div>
+      <div class="request-row">
+        <strong>Email</strong> <%= request.email %>
+      </div>
+      <div class="request-row">
+        <strong>Zpráva</strong> <%= request.message %>
+      </div>
+      <div class="request-row" style="margin-top:8px">
+        <strong>Stav</strong>
+        <span class="status-badge status-<%= request.status %>"><%= request.status %></span>
+      </div>
+
+      <div class="request-actions">
+        <form action="/requests/<%= request._id %>/approve" method="POST" style="margin:0">
+          <button class="btn btn-primary" type="submit">Schválit</button>
+        </form>
+        <form action="/requests/<%= request._id %>/reject" method="POST" style="margin:0">
+          <button class="btn btn-danger" type="submit">Zamítnout</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

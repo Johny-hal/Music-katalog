@@ -1,0 +1,33 @@
+<%- include('../partials/header', { title: 'Přidat skladbu' }) %>
+
+<div class="form-wrap">
+  <h1>Přidat skladbu</h1>
+  <form action="/songs" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Název</label>
+      <input type="text" name="title" placeholder="Název skladby" required>
+    </div>
+    <div class="form-group">
+      <label>Interpret</label>
+      <input type="text" name="artist" placeholder="Jméno interpreta / kapely" required>
+    </div>
+    <div class="form-group">
+      <label>Žánr</label>
+      <input type="text" name="genre" placeholder="Např. Thrash Metal, Death Metal..." required>
+    </div>
+    <div class="form-group">
+      <label>Popis</label>
+      <textarea name="description" placeholder="Popis skladby..." required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Cover (obrázek)</label>
+      <input type="file" name="image" accept="image/*">
+    </div>
+    <div class="form-submit">
+      <button class="btn btn-primary" type="submit">Uložit</button>
+    </div>
+  </form>
+  <a href="/songs" class="form-back">← Zpět</a>
+</div>
+
+<%- include('../partials/footer') %>

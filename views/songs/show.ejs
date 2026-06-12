@@ -1,0 +1,52 @@
+<%- include('../partials/header', { title: song.title }) %>
+
+<a href="/songs" class="back-link">← Zpět na seznam</a>
+
+<div class="detail-wrap">
+  <div class="detail-header">
+    <% if (song.image) { %>
+      <img src="/uploads/<%= song.image %>" alt="<%= song.title %>" class="detail-cover">
+    <% } else { %>
+      <div class="detail-cover-placeholder">🎵</div>
+    <% } %>
+
+    <div class="detail-info">
+      <h1><%= song.title %></h1>
+      <div class="meta">Interpret: <span><%= song.artist %></span></div>
+      <div class="meta">Žánr: <span><%= song.genre %></span></div>
+      <p class="detail-desc"><%= song.description %></p>
+
+      <% if (user) { %>
+        <div class="detail-actions">
+          <a href="/songs/<%= song._id %>/edit" class="btn btn-ghost">Upravit</a>
+          <form action="/songs/<%= song._id %>?_method=DELETE" method="POST" style="margin:0">
+            <button class="btn btn-danger">Smazat</button>
+          </form>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="license-section">
+    <h2>Žádost o licenci</h2>
+    <form action="/requests/<%= song._id %>" method="POST">
+      <div class="form-group">
+        <label>Jméno</label>
+        <input type="text" name="applicantName" placeholder="Vaše jméno" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="vas@email.cz" required>
+      </div>
+      <div class="form-group">
+        <label>Zpráva</label>
+        <textarea name="message" placeholder="Proč chcete získat licenci?" required></textarea>
+      </div>
+      <div class="form-submit">
+        <button class="btn btn-primary" type="submit">Odeslat žádost</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

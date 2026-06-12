@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' | Metal Vault' : 'Metal Vault' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/songs" class="nav-logo">🎸 METAL VAULT</a>
+
+  <div class="nav-links">
+    <a href="/songs">Skladby</a>
+    <% if (user) { %>
+      <a href="/requests">Žádosti o licenci</a>
+      <% if (user.role === 'admin') { %>
+        <a href="/admin/users" style="color:#cc2222">Admin</a>
+      <% } %>
+    <% } %>
+  </div>
+
+  <div class="nav-auth">
+    <% if (user) { %>
+      <span style="font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:1px;color:#555;align-self:center;text-transform:uppercase;">
+        <%= user.username %>
+      </span>
+      <form action="/logout" method="POST" style="margin:0">
+        <button class="btn btn-ghost">Odhlásit</button>
+      </form>
+    <% } else { %>
+      <a href="/login" class="btn btn-ghost">Login</a>
+      <a href="/register" class="btn btn-primary">Registrace</a>
+    <% } %>
+  </div>
+</nav>

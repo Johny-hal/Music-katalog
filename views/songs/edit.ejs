@@ -1,0 +1,36 @@
+<%- include('../partials/header', { title: 'Upravit skladbu' }) %>
+
+<div class="form-wrap">
+  <h1>Upravit skladbu</h1>
+  <form action="/songs/<%= song._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Název</label>
+      <input type="text" name="title" value="<%= song.title %>" required>
+    </div>
+    <div class="form-group">
+      <label>Interpret</label>
+      <input type="text" name="artist" value="<%= song.artist %>" required>
+    </div>
+    <div class="form-group">
+      <label>Žánr</label>
+      <input type="text" name="genre" value="<%= song.genre %>" required>
+    </div>
+    <div class="form-group">
+      <label>Popis</label>
+      <textarea name="description" required><%= song.description %></textarea>
+    </div>
+    <div class="form-group">
+      <label>Nový cover (nepovinné)</label>
+      <% if (song.image) { %>
+        <img src="/uploads/<%= song.image %>" alt="cover" style="width:80px;height:80px;object-fit:cover;display:block;margin-bottom:8px;border:1px solid #2a2a2a;">
+      <% } %>
+      <input type="file" name="image" accept="image/*">
+    </div>
+    <div class="form-submit">
+      <button class="btn btn-primary" type="submit">Uložit změny</button>
+    </div>
+  </form>
+  <a href="/songs/<%= song._id %>" class="form-back">← Zpět</a>
+</div>
+
+<%- include('../partials/footer') %>

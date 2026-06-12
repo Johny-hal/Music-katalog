@@ -1,0 +1,34 @@
+<%- include('../partials/header', { title: 'Skladby' }) %>
+
+<div class="hero">
+  <h1>METAL VAULT</h1>
+  <p>Katalog těžké hudby</p>
+</div>
+
+<div class="toolbar">
+  <span class="toolbar-title">Seznam skladeb</span>
+  <% if (user) { %>
+    <a href="/songs/create" class="btn btn-primary">+ Přidat</a>
+  <% } %>
+</div>
+
+<div class="songs-grid">
+  <% songs.forEach(song => { %>
+    <div class="card">
+      <% if (song.image) { %>
+        <img src="/uploads/<%= song.image %>" alt="<%= song.title %>" class="card-cover">
+      <% } else { %>
+        <div class="card-cover-placeholder">🎵</div>
+      <% } %>
+      <div class="card-body">
+        <div class="card-title">
+          <a href="/songs/<%= song._id %>"><%= song.title %></a>
+        </div>
+        <div class="card-artist"><%= song.artist %></div>
+        <span class="card-genre"><%= song.genre %></span>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>
